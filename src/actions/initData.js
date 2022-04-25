@@ -2,7 +2,7 @@ export const initData = {
   boards: [
     {
       id: 'board-1',
-      columnOrder: ['column-3', 'column-2', 'column-1'],
+      columnOrder: ['column-1', 'column-2', 'column-3'],
       columns: [
         {
           id: 'column-1',
@@ -59,6 +59,83 @@ export const initData = {
               boardId: 'board-1',
               columnId: 'column-1',
               title: 'title of card 6',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
+              image: null,
+            },
+            {
+              id: 'card-7',
+              boardId: 'board-1',
+              columnId: 'column-1',
+              title: 'title of card 7',
               image: null,
             },
             {
