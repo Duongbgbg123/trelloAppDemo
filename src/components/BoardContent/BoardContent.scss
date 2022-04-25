@@ -1,10 +1,10 @@
 @import "../../setting";
 
 .board-columns {
-    gap : 10px;
-    display :flex;
-    overflow-x: auto;
-    margin : 0 $gap $gap;
+  gap: 10px;
+  display: flex;
+  overflow-x: auto;
+  margin: 0 $gap $gap 0;
     &::-webkit-scrollbar{
       -webkit-appearance: none;
     }
@@ -15,6 +15,11 @@
       background-color: rgba(255,255,255,0.24);
       border-radius: 5px solid $list-bg-color;
     }
-  
+    
+    .columns-drop-preview {
+      background-color: rgba(150, 150, 200, 0.1);
+      border: 1px dashed #abc;
+      margin: 5px 45px 5px 5px;
+    }
 
   }
