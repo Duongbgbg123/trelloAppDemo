@@ -5,6 +5,7 @@ import Column from '../Column/Column';
 import { initData } from '../../actions/initData';
 import { mapOrder } from '../../ulities/sort';
 import { Container, Draggable } from 'react-smooth-dnd';
+import { applyDrag } from '../../ulities/dragDrop';
 function BoardContent() {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState([]);
@@ -29,7 +30,27 @@ function BoardContent() {
   }
 
   const onColumnDrop = (dropResult) => {
-    console.log('dropResult', dropResult);
+    let newColumns = [...columns];
+    newColumns = applyDrag(newColumns, dropResult);
+    let newBoard = { ...board };
+    newBoard.columnOrder = newColumns.map((column) => column.id);
+    newBoard.columns = newColumns;
+
+    setColumns(newColumns);
+    setBoard(newBoard);
+  };
+
+  const onCardDrop = (dropResult, columnId) => {
+    if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+      console.log('onCardDrop : ', dropResult, columnId);
+
+      let NewColumns = [...columns];
+      let currentColumn = NewColumns.find((column) => column.id === columnId);
+      console.log('current column', currentColumn);
+      currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
+      currentColumn.cardOrder = currentColumn.cards.map((card) => card.id);
+      setColumns(NewColumns);
+    }
   };
 
   return (
@@ -51,10 +72,13 @@ function BoardContent() {
             columns.map((column, index) => {
               return (
                 <Draggable key={column.id}>
-                  <Column column={column} />
+                  <Column column={column} onCardDrop={onCardDrop} />
                 </Draggable>
               );
             })}
+          <div className="add-new-column">
+            <i className="fa fa-plus icon"></i> Add New Column
+          </div>
         </Container>
       </div>
     </>
