@@ -85,6 +85,19 @@ function BoardContent() {
     inputRef.current.focus();
   };
 
+  const onUpdateColumn = (newColumn) => {
+    const columnIdUpdate = newColumn.id;
+    let ncols = [...columns]; //originnal
+    let index = ncols.findIndex((item) => (item.id = columnIdUpdate));
+    if (newColumn._destroy) {
+      //remove column
+      ncols.splice(index, 1);
+    } else {
+      ncols[index] = newColumn;
+    }
+    setColumns(ncols);
+  };
+  // console.log(columns);
   return (
     <>
       <div className="board-columns">
@@ -104,7 +117,11 @@ function BoardContent() {
             columns.map((column, index) => {
               return (
                 <Draggable key={column.id}>
-                  <Column column={column} onCardDrop={onCardDrop} />
+                  <Column
+                    column={column}
+                    onCardDrop={onCardDrop}
+                    onUpdateColumn={onUpdateColumn}
+                  />
                 </Draggable>
               );
             })}
