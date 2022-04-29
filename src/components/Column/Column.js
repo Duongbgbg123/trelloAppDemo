@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Dropdown, Form } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
+
 import './Column.scss';
 import Card from '../Card/Card';
 import { mapOrder } from '../../ulities/sort';
@@ -18,7 +20,18 @@ function Column(props) {
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [titleColumn, setTitleColumn] = useState('');
   const [isFirstClick, setIsFirstClick] = useState(true);
+  const [isShowNewCard, setIsShowNewCard] = useState(false);
+  const [valueTextArea, setValueTextArea] = useState('');
+
+  const textAreaRef = useRef(null);
   const inputRef = useRef();
+
+  useEffect(() => {
+    if (isShowNewCard === true && textAreaRef && textAreaRef.current) {
+      textAreaRef.current.focus();
+    }
+  }, [isShowNewCard]);
+
   const toggleModal = () => {
     setIsShowModalDelete(!isShowModalDelete);
   };
@@ -62,6 +75,28 @@ function Column(props) {
     };
     onUpdateColumn(newColumn);
   };
+
+  const handleAddNewCard = () => {
+    if (!valueTextArea) {
+      textAreaRef.current.focus();
+      return;
+    }
+    const newCard = {
+      id: uuidv4(),
+      boardId: column.boardId,
+      columnId: column.id,
+      title: valueTextArea,
+      image: null,
+    };
+    let newColumn = { ...column };
+    newColumn.cards = [...newColumn.cards, newCard];
+    newColumn.cardOrder = newColumn.cards.map((card) => card.id);
+    // console.log(newColumn);
+    onUpdateColumn(newColumn);
+    setValueTextArea('');
+    setIsShowNewCard(false);
+  };
+
   return (
     <>
       <div className="column">
@@ -122,13 +157,37 @@ function Column(props) {
                 );
               })}
           </Container>
+          {isShowNewCard === true && (
+            <div className="add-new-card">
+              <textarea
+                rows="2"
+                type="text"
+                className="form-control"
+                placeholder=""
+                ref={textAreaRef}
+                value={valueTextArea}
+                onChange={(e) => setValueTextArea(e.target.value)}
+              ></textarea>
+              <div className="group-btn">
+                <button className="btn btn-success" onClick={handleAddNewCard}>
+                  Add List
+                </button>
+                <i className="fa fa-times icon"></i>
+              </div>
+            </div>
+          )}
         </div>
-        <footer>
-          <div className="footer-action">
-            <i className="fa fa-plus icon"></i>
-            Add another card
-          </div>
-        </footer>
+        {isShowNewCard === false && (
+          <footer>
+            <div
+              className="footer-action"
+              onClick={() => setIsShowNewCard(true)}
+            >
+              <i className="fa fa-plus icon"></i>
+              Add another card
+            </div>
+          </footer>
+        )}
       </div>
       <ConfirmModal
         show={isShowModalDelete}

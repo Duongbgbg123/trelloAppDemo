@@ -125,36 +125,36 @@ function BoardContent() {
                 </Draggable>
               );
             })}
-
-          {isShowAddList === false ? (
-            <div
-              className="add-new-column"
-              onClick={() => setIsShowAddList(!isShowAddList)}
-            >
-              <i className="fa fa-plus icon"></i> Add New Column
-            </div>
-          ) : (
-            <div className="content-add-column">
-              <input
-                type="text"
-                className="form-control"
-                placeholder=""
-                ref={inputRef}
-                value={valueInput}
-                onChange={(e) => setValueInput(e.target.value)}
-              />
-              <div className="group-btn">
-                <button className="btn btn-success" onClick={handleAddList}>
-                  Add List
-                </button>
-                <i
-                  className="fa fa-times icon"
-                  onClick={() => setIsShowAddList(!isShowAddList)}
-                ></i>
-              </div>
-            </div>
-          )}
         </Container>
+
+        {isShowAddList === false ? (
+          <div
+            className="add-new-column"
+            onClick={() => setIsShowAddList(!isShowAddList)}
+          >
+            <i className="fa fa-plus icon"></i> Add New Column
+          </div>
+        ) : (
+          <div className="content-add-column">
+            <input
+              type="text"
+              className="form-control"
+              placeholder=""
+              ref={inputRef}
+              value={valueInput}
+              onChange={(e) => setValueInput(e.target.value)}
+            />
+            <div className="group-btn">
+              <button className="btn btn-success" onClick={handleAddList}>
+                Add List
+              </button>
+              <i
+                className="fa fa-times icon"
+                onClick={() => setIsShowAddList(!isShowAddList)}
+              ></i>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
